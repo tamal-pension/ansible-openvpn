@@ -1,0 +1,2 @@
+environment_name: pension-stg
+s3_bucket_backup: pension-stg-backup
