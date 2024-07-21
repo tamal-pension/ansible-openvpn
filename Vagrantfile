@@ -21,10 +21,10 @@ Vagrant.configure("2") do |config|
     cd /vagrant
     yum -y erase python3 && amazon-linux-extras install python3.8  
     echo $PWD
-    #export VAULT_PASSWORD=#{`op read "op://Security/ansible-vault inqwise-stg/password"`.strip!}
-    #echo "$VAULT_PASSWORD" > secret
+    export VAULT_PASSWORD=#{`op read "op://Security/ansible-vault tamal-pension-stg/password"`.strip!}
+    echo "$VAULT_PASSWORD" > vault_password
     curl -s https://raw.githubusercontent.com/inqwise/ansible-automation-toolkit/master/main_amzn2.sh | bash -s -- -r #{AWS_REGION} -e "playbook_name=openvpn-test discord_message_owner_name=#{Etc.getpwuid(Process.uid).name}"
-    #rm secret
+    rm vault_password
   SHELL
 
   config.vm.provider :aws do |aws, override|
@@ -38,7 +38,9 @@ Vagrant.configure("2") do |config|
     aws.keypair_name = Etc.getpwuid(Process.uid).name
     override.vm.allowed_synced_folder_types = [:rsync]
     override.vm.synced_folder ".", "/vagrant", type: :rsync, rsync__exclude: ['.git/','ansible-galaxy/'], disabled: false
-    override.vm.synced_folder '../ansible-galaxy', '/vagrant/ansible-galaxy', type: :rsync, rsync__exclude: '.git/', disabled: false
+    collection_path = ENV['COMMON_COLLECTION_PATH'] || '~/git/ansible-common-collection'
+    override.vm.synced_folder collection_path, '/vagrant/ansible-galaxy', type: :rsync, rsync__exclude: '.git/', disabled: false      
+
     
     aws.region = AWS_REGION
     aws.security_groups = ["sg-077f8d7d58d420467","sg-09c42fac1675f375f"]
