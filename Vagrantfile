@@ -5,15 +5,8 @@
 # vagrant up --provider=aws
 # vagrant destroy -f && vagrant up --provider=aws --debug
 
-
-
-# Vagrant.configure("2") do |config|
-#   config.vm.provision "shell", inline: <<-SHELL
-#       yum -y erase python3
-#       #yum -y install curl gcc libffi-devel openssl-devel
-#       amazon-linux-extras install python3.8
-#       pip3.8 install -r /vagrant/requirements.txt --upgrade ansible
-#     SHELL
+TOPIC_NAME = "pre_playbook_errors"
+ACCOUNT_ID = "339712742264"
 AWS_REGION = "eu-west-1"
 Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
@@ -23,7 +16,7 @@ Vagrant.configure("2") do |config|
     echo $PWD
     export VAULT_PASSWORD=#{`op read "op://Security/ansible-vault tamal-pension-stg/password"`.strip!}
     echo "$VAULT_PASSWORD" > vault_password
-    curl -s https://raw.githubusercontent.com/inqwise/ansible-automation-toolkit/master/main_amzn2.sh | bash -s -- -r #{AWS_REGION} -e "playbook_name=openvpn-test discord_message_owner_name=#{Etc.getpwuid(Process.uid).name}"
+    curl -s https://raw.githubusercontent.com/inqwise/ansible-automation-toolkit/master/main_amzn2.sh | bash -s -- -r #{AWS_REGION} -e "playbook_name=openvpn-test discord_message_owner_name=#{Etc.getpwuid(Process.uid).name}" --topic-name #{TOPIC_NAME} --account-id #{ACCOUNT_ID}
     rm vault_password
   SHELL
 
@@ -51,7 +44,7 @@ Vagrant.configure("2") do |config|
     aws.associate_public_ip = true
     aws.iam_instance_profile_name = "bootstrap-role"
     aws.tags = {
-      Name: 'vagrant-openvpn'
+      Name: "openvpn-test-#{Etc.getpwuid(Process.uid).name}"
     }
   end
 end
