@@ -24,8 +24,8 @@ Vagrant.configure("2") do |config|
   	override.vm.box = "dummy"
     override.ssh.username = "ec2-user"
     override.ssh.private_key_path = "~/.ssh/id_rsa"
-    aws.access_key_id             = `op read "op://Employee/aws pension-stg/Security/Access key ID"`.strip!
-    aws.secret_access_key         = `op read "op://Employee/aws pension-stg/Security/Secret access key"`.strip!
+    aws.access_key_id             = `op read "op://Security/aws pension-stg/Security/Access key ID"`.strip!
+    aws.secret_access_key         = `op read "op://Security/aws pension-stg/Security/Secret access key"`.strip!
     #aws.session_token             = ENV["VAGRANT_AWS_SESSION_TOKEN"]
     #aws.aws_dir = ENV['HOME'] + "/.aws/"
     aws.keypair_name = Etc.getpwuid(Process.uid).name
