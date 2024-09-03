@@ -18,6 +18,4 @@ masquerade:
     masquerade_source: "10.41.0.0/16"
     masquerade_protocol: "tcp"
 backup_bucket: backup-pension-stg
-private_ip: "{{ ansible_default_ipv4['address'] }}"
-access_file_url: "https://raw.githubusercontent.com/inqwise/ansible-automation-toolkit/master/access.yml"
-access_remote_base_path: "/tmp/ansible-openvpn/vars/access.yml"
+aws_iam_role: "vpn-role"
