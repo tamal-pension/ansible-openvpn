@@ -8,3 +8,4 @@ main.sh
 goldenimage_script.sh
 manifest.json
 goldenimage_result.json
+goldenimage.pkr.hcl
