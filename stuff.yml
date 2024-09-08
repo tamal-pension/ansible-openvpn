@@ -1,5 +1,6 @@
 ---
-- import_role:
+- name: AWS Role
+  ansible.builtin.import_role:
     name: aws
   vars:
     dns_record_list:
@@ -19,7 +20,7 @@
       tags: configuration
   tags: configuration
 
-- name: Import openvpnas role 
+- name: Openvpnas Role 
   ansible.builtin.import_role:
     name: inqwise.stacktrek.openvpnas
   vars:
