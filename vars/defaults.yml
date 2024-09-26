@@ -12,7 +12,10 @@ users_groups:
 users:
   - name: "{{ app_user }}"
     group: "{{ app_group }}"
-    append: yes
+    append: true
+    create_home: false
+    system: true
+    shell: /sbin/nologin
 masquerade:
     masquerade_out_interface: "eth0"
     masquerade_source: "10.41.0.0/16"
