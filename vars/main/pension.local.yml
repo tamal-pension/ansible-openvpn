@@ -1,2 +1,4 @@
 environment_name: pension-prod
 s3_bucket_backup: pension-backup
+private_domain: pension-stg.local
+public_domain: pension-stg.tamal.co.il
