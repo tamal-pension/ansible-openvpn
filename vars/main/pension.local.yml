@@ -1,4 +1,8 @@
 environment_name: pension-prod
-s3_bucket_backup: pension-backup
-private_domain: pension-stg.local
-public_domain: pension-stg.tamal.co.il
+backup_bucket: pension-backup
+private_domain: pension.local
+public_domain: pension.tamal.co.il
+masquerade:
+    masquerade_out_interface: "eth0"
+    masquerade_source: "10.10.0.0/16"
+    masquerade_protocol: "tcp"
