@@ -1,4 +1,4 @@
-environment_name: pension-prod
+environment_name: pension
 backup_bucket: pension-backup
 private_domain: pension.local
 public_domain: pension.tamal.co.il
@@ -6,3 +6,4 @@ masquerade:
     masquerade_out_interface: "eth0"
     masquerade_source: "10.10.0.0/16"
     masquerade_protocol: "tcp"
+internal_base_url: https://internal-pension.s3.amazonaws.com
