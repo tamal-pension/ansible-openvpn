@@ -1,5 +1,5 @@
 environment_name: pension
-backup_bucket: pension-backup
+backup_bucket: backup-pension
 private_domain: pension.local
 public_domain: pension.tamal.co.il
 masquerade:

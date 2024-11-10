@@ -1,5 +1,5 @@
 environment_name: pension-stg
-backup_bucket: pension-stg-backup
+backup_bucket: backup-pension-stg
 private_domain: pension-stg.local
 public_domain: pension-stg.tamal.co.il
 masquerade:
